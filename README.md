@@ -12,11 +12,11 @@ A maintainable LaTeX CV system with one shared source and multiple company-speci
 
 - `base/`: shared CV source
 - `base/preamble.tex`: packages, typography, layout
-- `base/commands.tex`: reusable macros and default variables
+- `base/commands.tex`: reusable macros
 - `base/sections/`: content blocks (`header`, `experience`, `projects`, `education`, `skills`)
 - `companies/<company>/`: company-specific CV entry points
 - `companies/<company>/main.tex`: section composition/order
-- `companies/<company>/overrides.tex`: role-specific overrides (for example skills)
+- `companies/<company>/sections/`: company-specific sections (only files that differ)
 - `main.tex`: top-level entry file (recommended for Overleaf)
 
 ## Overleaf Usage
@@ -32,25 +32,23 @@ Do not compile include files directly (such as `base/preamble.tex` or `base/sect
 ## Create a New Company CV
 
 1. Create `companies/<new-company>/`.
-2. Copy from `companies/example/`:
-   - `main.tex`
-   - `overrides.tex`
-3. Update `main.tex` to reorder/include sections.
-4. Update `overrides.tex` with role-specific settings.
+2. Add `main.tex` for that company.
+3. Import shared sections from `base/sections/`.
+4. For any section that needs custom content, create `companies/<new-company>/sections/<section>.tex` and import it in `main.tex`.
 
-## Skill Customization
+## Customization Pattern (No Overrides)
 
-Available override macros:
-
-- `\SkillLanguages`
-- `\SkillTools`
-
-Example:
+Use direct component imports in each company `main.tex`:
 
 ```tex
-\renewcommand{\SkillLanguages}{Java, Python, SQL}
-\renewcommand{\SkillTools}{Spring Boot, Kafka, Redis, Docker}
+\input{../../base/sections/header}
+\input{../../base/sections/experience}
+\input{../../base/sections/projects}
+\input{sections/skills} % company-specific
+\input{../../base/sections/education}
 ```
+
+This keeps the architecture explicit and easy to maintain.
 
 ## Included Examples
 
