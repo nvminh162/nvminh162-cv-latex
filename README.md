@@ -36,7 +36,7 @@ Do not compile include files directly (such as `base/preamble.tex` or `base/sect
 3. Import shared sections from `base/sections/`.
 4. For any section that needs custom content, create `companies/<new-company>/sections/<section>.tex` and import it in `main.tex`.
 
-## Customization Pattern (No Overrides)
+## Customization Pattern
 
 Use direct component imports in each company `main.tex`:
 
