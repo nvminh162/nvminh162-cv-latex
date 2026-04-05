@@ -1,59 +1,61 @@
-# Nguyen Van Minh - CV LaTeX (Modular)
+# Nguyen Van Minh - Modular LaTeX CV
 
-Hệ thống CV LaTeX theo kiến trúc module: một nguồn nội dung chung, nhiều CV theo từng công ty.
+A maintainable LaTeX CV system with one shared source and multiple company-specific versions.
 
-## Mục tiêu
+## Why This Structure
 
-- Không copy/paste nhiều file CV.
-- Dễ tùy biến theo từng job/company.
-- Dễ bảo trì khi cập nhật nội dung.
+- Keep core content in one place.
+- Tailor each CV per role without duplication.
+- Update once, propagate everywhere.
 
-## Cấu trúc chính
+## Project Layout
 
-- base/: nội dung và style dùng chung
-- base/preamble.tex: package, layout, font
-- base/commands.tex: macro và biến cấu hình
-- base/sections/: từng phần của CV (header, experience, projects, education, skills)
-- companies/<company-name>/: CV riêng cho từng công ty
-- companies/<company-name>/main.tex: chọn thứ tự section
-- companies/<company-name>/overrides.tex: override skill/biến riêng
-- main.tex: entry root để compile trên Overleaf
+- `base/`: shared CV source
+- `base/preamble.tex`: packages, typography, layout
+- `base/commands.tex`: reusable macros and default variables
+- `base/sections/`: content blocks (`header`, `experience`, `projects`, `education`, `skills`)
+- `companies/<company>/`: company-specific CV entry points
+- `companies/<company>/main.tex`: section composition/order
+- `companies/<company>/overrides.tex`: role-specific overrides (for example skills)
+- `main.tex`: top-level entry file (recommended for Overleaf)
 
-## Cách dùng trên Overleaf
+## Overleaf Usage
 
-1. Upload toàn bộ project.
-2. Vào Menu > Main document và chọn:
-   - main.tex (khuyến nghị), hoặc
-   - companies/<company-name>/main.tex nếu chỉ muốn compile 1 CV cụ thể.
-3. Recompile.
+1. Upload the full repository.
+2. In `Menu > Main document`, choose:
+   - `main.tex` (recommended), or
+   - `companies/<company>/main.tex` for a specific version.
+3. Click Recompile.
 
-Lưu ý: không compile trực tiếp các file include như preamble.tex hoặc sections/*.tex.
+Do not compile include files directly (such as `base/preamble.tex` or `base/sections/*`).
 
-## Tạo CV cho công ty mới
+## Create a New Company CV
 
-1. Tạo thư mục companies/<new-company>/.
-2. Copy từ companies/example/:
-   - main.tex
-   - overrides.tex
-3. Chỉnh main.tex để đổi thứ tự/ẩn hiện section.
-4. Chỉnh overrides.tex để thay skill theo JD.
+1. Create `companies/<new-company>/`.
+2. Copy from `companies/example/`:
+   - `main.tex`
+   - `overrides.tex`
+3. Update `main.tex` to reorder/include sections.
+4. Update `overrides.tex` with role-specific settings.
 
-## Tùy biến skills theo công ty
+## Skill Customization
 
-Hiện tại hỗ trợ 2 macro:
+Available override macros:
 
-- \SkillLanguages
-- \SkillTools
+- `\SkillLanguages`
+- `\SkillTools`
 
-Ví dụ trong overrides.tex:
+Example:
 
+```tex
 \renewcommand{\SkillLanguages}{Java, Python, SQL}
 \renewcommand{\SkillTools}{Spring Boot, Kafka, Redis, Docker}
+```
 
-## Ví dụ đã có sẵn
+## Included Examples
 
-- companies/google-swe/
-- companies/shopee-backend/
+- `companies/google-swe/`
+- `companies/shopee-backend/`
 
 ## License
 
