@@ -1,166 +1,60 @@
-# Nguyen Van Minh - Curriculum Vitae with LaTeX
+# Nguyen Van Minh - CV LaTeX (Modular)
 
-> Personal modular LaTeX CV system by **Nguyen Van Minh (nvminh162)**
+Hệ thống CV LaTeX theo kiến trúc module: một nguồn nội dung chung, nhiều CV theo từng công ty.
 
----
+## Mục tiêu
 
-## Overview
+- Không copy/paste nhiều file CV.
+- Dễ tùy biến theo từng job/company.
+- Dễ bảo trì khi cập nhật nội dung.
 
-This repository is a **modular LaTeX-based CV system** designed to efficiently manage and generate multiple tailored resumes for different companies and roles.
+## Cấu trúc chính
 
-Instead of maintaining separate CV files, this project follows a **single-source-of-truth architecture**, allowing reusable content and easy customization per application.
+- base/: nội dung và style dùng chung
+- base/preamble.tex: package, layout, font
+- base/commands.tex: macro và biến cấu hình
+- base/sections/: từng phần của CV (header, experience, projects, education, skills)
+- companies/<company-name>/: CV riêng cho từng công ty
+- companies/<company-name>/main.tex: chọn thứ tự section
+- companies/<company-name>/overrides.tex: override skill/biến riêng
+- main.tex: entry root để compile trên Overleaf
 
----
+## Cách dùng trên Overleaf
 
-## Key Features
+1. Upload toàn bộ project.
+2. Vào Menu > Main document và chọn:
+   - main.tex (khuyến nghị), hoặc
+   - companies/<company-name>/main.tex nếu chỉ muốn compile 1 CV cụ thể.
+3. Recompile.
 
-* **Modular structure** — reusable sections and components
-* **Company-specific CVs** — tailored resumes per job
-* **No duplication** — maintain content in one place
-* **Automated build** — generate all CVs with a script
-* **Clean output management** — organized PDF exports
+Lưu ý: không compile trực tiếp các file include như preamble.tex hoặc sections/*.tex.
 
----
+## Tạo CV cho công ty mới
 
-## Project Structure
+1. Tạo thư mục companies/<new-company>/.
+2. Copy từ companies/example/:
+   - main.tex
+   - overrides.tex
+3. Chỉnh main.tex để đổi thứ tự/ẩn hiện section.
+4. Chỉnh overrides.tex để thay skill theo JD.
 
-```
-nvminh162-cv-latex/
-│
-├── base/                      # Core reusable content
-│   ├── main.tex
-│   ├── preamble.tex
-│   ├── sections/
-│   ├── components/
-│   ├── styles/
-│   └── assets/
-│
-├── companies/                # Company-specific CVs
-│   ├── google-swe/
-│   ├── shopee-backend/
-│   └── vng-intern/
-│
-├── output/                   # Generated PDFs
-├── scripts/                  # Build scripts
-│
-├── .gitignore
-├── README.md
-└── LICENSE
-```
+## Tùy biến skills theo công ty
 
----
+Hiện tại hỗ trợ 2 macro:
 
-## How It Works
+- \SkillLanguages
+- \SkillTools
 
-### Base Layer (`base/`)
+Ví dụ trong overrides.tex:
 
-Contains all shared content:
+\renewcommand{\SkillLanguages}{Java, Python, SQL}
+\renewcommand{\SkillTools}{Spring Boot, Kafka, Redis, Docker}
 
-* education
-* experience
-* projects
-* skills
+## Ví dụ đã có sẵn
 
-This acts as the **single source of truth**.
-
----
-
-### Custom Layer (`companies/`)
-
-Each folder represents a tailored CV for a specific role/company.
-
-Example:
-
-```
-companies/google-swe/
-companies/shopee-backend/
-```
-
-Each includes:
-
-* `main.tex` → entry point
-* `overrides.tex` → customization logic
-
----
-
-### Overrides System
-
-Customize CV per company by:
-
-* reordering sections
-* highlighting relevant experience
-* excluding irrelevant content
-
----
-
-## Build Instructions
-
-### 1. Build a specific CV
-
-```bash
-cd companies/google-swe
-pdflatex main.tex
-```
-
----
-
-### 2. Build all CVs (recommended)
-
-```bash
-bash scripts/build.sh
-```
-
-Outputs will be generated in:
-
-```
-output/
-```
-
----
-
-## Best Practices
-
-* Keep all shared content inside `base/`
-* Avoid duplicating sections across CVs
-* Use `overrides.tex` for customization
-* Name folders clearly:
-
-  * `google-swe`
-  * `shopee-backend`
-  * `vng-intern`
-
----
-
-## Output
-
-Generated CVs are stored in:
-
-```
-output/*.pdf
-```
-
-These files are ready to:
-
-* attach to job applications
-* share via GitHub
-
----
-
-## Author
-
-**Nguyen Van Minh**
-GitHub: https://github.com/nvminh162
-
----
+- companies/google-swe/
+- companies/shopee-backend/
 
 ## License
 
-This project is licensed under the MIT License.
-
----
-
-## Philosophy
-
-> Treat your CV like a system — not a document.
-
----
+MIT
