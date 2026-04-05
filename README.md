@@ -1,4 +1,4 @@
-# nvminh162-cv-latex
+# Nguyen Van Minh - Curriculum Vitae with LaTeX
 
 > Personal modular LaTeX CV system by **Nguyen Van Minh (nvminh162)**
 
