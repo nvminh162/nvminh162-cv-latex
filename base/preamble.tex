@@ -15,6 +15,7 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{iftex}
 % only for pdflatex
 % \input{glyphtounicode}
 
@@ -43,9 +44,17 @@
 }
 
 % custom font: helvetica-style
-\usepackage{tgheros}
-\renewcommand*\familydefault{\sfdefault}
-\usepackage[T1]{fontenc}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage{tgheros}
+  \renewcommand*\familydefault{\sfdefault}
+\else
+  \usepackage{fontspec}
+  \setsansfont{TeX Gyre Heros}
+  \setmainfont{TeX Gyre Heros}
+  \setmonofont{Fira Mono}
+  \renewcommand*\familydefault{\sfdefault}
+\fi
 
 \pagestyle{fancy}
 \fancyhf{}

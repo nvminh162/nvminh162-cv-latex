@@ -22,12 +22,40 @@ A maintainable LaTeX CV system with one shared source and multiple company-speci
 ## Overleaf Usage
 
 1. Upload the full repository.
-2. In `Menu > Main document`, choose:
-   - `main.tex` (recommended), or
-   - `companies/<company>/main.tex` for a specific version.
-3. Click Recompile.
+2. In `Menu > Main document`, choose `main.tex` (recommended).
+3. Open `main.tex` and uncomment the profile you want to build.
+4. Click Recompile.
+
+If you prefer, you can also set `companies/<company>/main.tex` as the main document directly.
 
 Do not compile include files directly (such as `base/preamble.tex` or `base/sections/*`).
+
+## Local Build (recommended)
+
+Build from each profile folder (this avoids relative-path issues):
+
+```powershell
+cd companies/google-swe
+latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
+```
+
+```powershell
+cd companies/shopee-backend
+latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
+```
+
+For the generic base CV:
+
+```powershell
+cd base
+latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
+```
+
+Clean build artifacts:
+
+```powershell
+latexmk -C
+```
 
 ## Create a New Company CV
 
