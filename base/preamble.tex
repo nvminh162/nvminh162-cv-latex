@@ -29,6 +29,7 @@
 \definecolor{light-grey}{gray}{0.83}
 \definecolor{dark-grey}{gray}{0.3}
 \definecolor{text-grey}{gray}{.08}
+\definecolor{harvard-crimson}{RGB}{165,28,48}
 
 \DeclareRobustCommand{\ebseries}{\fontseries{eb}\selectfont}
 \DeclareTextFontCommand{\texteb}{\ebseries}
@@ -77,8 +78,9 @@
 
 % Section formatting
 \titleformat{\section}{
-    \bfseries \vspace{2pt} \raggedright \large
-}{}{0em}{}[\color{light-grey}{\titlerule[2pt]}\vspace{-4pt}]
+  \color{harvard-crimson}\bfseries \vspace{2pt} \raggedright \large
+}{}{0em}{}[\color{text-grey}{\titlerule}\vspace{-4pt}]
+\titlespacing*{\section}{0pt}{8pt}{6pt}
 
 % only for pdflatex
 % \pdfgentounicode=1
