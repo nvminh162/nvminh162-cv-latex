@@ -20,18 +20,14 @@ Compile from the profile directory you want to build:
 
 ```powershell
 cd base
-latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
+
+xelatex -interaction=nonstopmode -file-line-error main.tex
 ```
 
 ```powershell
 cd companies/<target-profile>
-latexmk -xelatex -interaction=nonstopmode -file-line-error main.tex
-```
 
-Clean temporary build artifacts:
-
-```powershell
-latexmk -C
+xelatex -interaction=nonstopmode -file-line-error main.tex
 ```
 
 ## Overleaf
